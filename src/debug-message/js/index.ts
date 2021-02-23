@@ -53,42 +53,35 @@ export class JSDebugMessage extends DebugMessage {
     ) {
       logMessagePrefix = `${delemiterInsideMessage} `;
     }
-    const debuggingMsg: string = `console.log(${quote}${logMessagePrefix}${
-      logMessagePrefix.length !== 0 &&
+    const debuggingMsg: string = `console.log(${quote}${logMessagePrefix}${logMessagePrefix.length !== 0 &&
       logMessagePrefix !== `${delemiterInsideMessage} `
-        ? ` ${delemiterInsideMessage} `
+      ? ` ${delemiterInsideMessage} `
+      : ""
+      }${includeFileNameAndLineNum
+        ? `file: ${fileName} ${delemiterInsideMessage} line ${lineOfLogMsg + 1
+        } ${delemiterInsideMessage} `
         : ""
-    }${
-      includeFileNameAndLineNum
-        ? `file: ${fileName} ${delemiterInsideMessage} line ${
-            lineOfLogMsg + 1
-          } ${delemiterInsideMessage} `
-        : ""
-    }${
-      insertEnclosingClass
+      }${insertEnclosingClass
         ? classThatEncloseTheVar.length > 0
           ? `${classThatEncloseTheVar} ${delemiterInsideMessage} `
           : ``
         : ""
-    }${
-      insertEnclosingFunction
+      }${insertEnclosingFunction
         ? funcThatEncloseTheVar.length > 0
           ? `${funcThatEncloseTheVar} ${delemiterInsideMessage} `
           : ""
         : ""
-    }${selectedVar}${quote}, ${selectedVar})${semicolon}`;
+      }${selectedVar}${quote}, ${selectedVar}, { depth: null })${semicolon}`;
     if (wrapLogMessage) {
       // 16 represents the length of console.log("");
       const wrappingMsg: string = `console.log(${quote}${logMessagePrefix} ${"-".repeat(
         debuggingMsg.length - 16
       )}${quote})${semicolon}`;
-      return `${
-        lineOfLogMsg === document.lineCount ? "\n" : ""
-      }${spacesBeforeMsg}${wrappingMsg}\n${spacesBeforeMsg}${debuggingMsg}\n${spacesBeforeMsg}${wrappingMsg}\n`;
+      return `${lineOfLogMsg === document.lineCount ? "\n" : ""
+        }${spacesBeforeMsg}${wrappingMsg}\n${spacesBeforeMsg}${debuggingMsg}\n${spacesBeforeMsg}${wrappingMsg}\n`;
     }
-    return `${
-      lineOfLogMsg === document.lineCount ? "\n" : ""
-    }${spacesBeforeMsg}${debuggingMsg}\n`;
+    return `${lineOfLogMsg === document.lineCount ? "\n" : ""
+      }${spacesBeforeMsg}${debuggingMsg}\n`;
   }
   line(
     document: TextDocument,
@@ -409,7 +402,7 @@ export class JSDebugMessage extends DebugMessage {
         } else {
           if (
             currentLineTextChars[
-              currentLine.firstNonWhitespaceCharacterIndex - 1
+            currentLine.firstNonWhitespaceCharacterIndex - 1
             ] === "\t"
           ) {
             return " ".repeat(
@@ -422,7 +415,7 @@ export class JSDebugMessage extends DebugMessage {
       } else {
         if (
           currentLineTextChars[
-            currentLine.firstNonWhitespaceCharacterIndex - 1
+          currentLine.firstNonWhitespaceCharacterIndex - 1
           ] === "\t"
         ) {
           return " ".repeat(
@@ -435,7 +428,7 @@ export class JSDebugMessage extends DebugMessage {
     } else {
       if (
         currentLineTextChars[
-          currentLine.firstNonWhitespaceCharacterIndex - 1
+        currentLine.firstNonWhitespaceCharacterIndex - 1
         ] === "\t"
       ) {
         return " ".repeat(
@@ -462,11 +455,11 @@ export class JSDebugMessage extends DebugMessage {
             if (
               lineOfSelectedVar > currentLineNum &&
               lineOfSelectedVar <
-                this.closingElementLine(
-                  document,
-                  currentLineNum,
-                  LocElement.Braces
-                )
+              this.closingElementLine(
+                document,
+                currentLineNum,
+                LocElement.Braces
+              )
             ) {
               return `${this.lineCodeProcessing.getClassName(currentLineText)}`;
             }
@@ -484,11 +477,11 @@ export class JSDebugMessage extends DebugMessage {
             if (
               lineOfSelectedVar >= currentLineNum &&
               lineOfSelectedVar <
-                this.closingElementLine(
-                  document,
-                  currentLineNum,
-                  LocElement.Braces
-                )
+              this.closingElementLine(
+                document,
+                currentLineNum,
+                LocElement.Braces
+              )
             ) {
               if (
                 this.lineCodeProcessing.getFunctionName(currentLineText)
