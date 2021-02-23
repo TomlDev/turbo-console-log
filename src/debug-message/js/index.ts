@@ -53,7 +53,7 @@ export class JSDebugMessage extends DebugMessage {
     ) {
       logMessagePrefix = `${delemiterInsideMessage} `;
     }
-    const debuggingMsg: string = `console.log(${quote}${logMessagePrefix}${logMessagePrefix.length !== 0 &&
+    const debuggingMsg: string = `console.dir(${quote}${logMessagePrefix}${logMessagePrefix.length !== 0 &&
       logMessagePrefix !== `${delemiterInsideMessage} `
       ? ` ${delemiterInsideMessage} `
       : ""

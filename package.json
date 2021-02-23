@@ -1,9 +1,9 @@
 {
-  "name": "turbo-console-log",
-  "displayName": "Turbo Console Log",
+  "name": "turbo-console-log-no-depth",
+  "displayName": "Turbo Console Log (Tom)",
   "description": "Automating the process of writing meaningful log messages.",
-  "version": "2.1.6",
-  "publisher": "ChakrounAnas",
+  "version": "1.0.1",
+  "publisher": "TomlDev",
   "engines": {
     "vscode": "^1.50.0"
   },
