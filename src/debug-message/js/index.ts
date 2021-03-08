@@ -53,7 +53,7 @@ export class JSDebugMessage extends DebugMessage {
     ) {
       logMessagePrefix = `${delemiterInsideMessage} `;
     }
-    const debuggingMsg: string = `console.dir(${quote}${logMessagePrefix}${logMessagePrefix.length !== 0 &&
+    const debuggingMsg: string = `console.dir(\`${logMessagePrefix}${logMessagePrefix.length !== 0 &&
       logMessagePrefix !== `${delemiterInsideMessage} `
       ? ` ${delemiterInsideMessage} `
       : ""
@@ -71,7 +71,7 @@ export class JSDebugMessage extends DebugMessage {
           ? `${funcThatEncloseTheVar} ${delemiterInsideMessage} `
           : ""
         : ""
-      }${selectedVar}${quote}, ${selectedVar}, { depth: null })${semicolon}`;
+      }${selectedVar}, ${selectedVar}\`, { depth: null })${semicolon}`;
     if (wrapLogMessage) {
       // 16 represents the length of console.log("");
       const wrappingMsg: string = `console.log(${quote}${logMessagePrefix} ${"-".repeat(
