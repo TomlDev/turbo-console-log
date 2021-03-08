@@ -4,6 +4,16 @@
 
 This extension make debugging much easier by automating the operation of writing meaningful log message.
 
+## How to build & install
+
+1) Build VS Code executable
+
+`vsce package`
+
+2) Install (replace version number)
+
+`code --install-extension turbo-console-log-no-depth-1.0.1.vsix`
+
 ## Features
 
 ---
